@@ -28,7 +28,7 @@ struct EditTaskView: View {
         // Create a copy of the task. If edits are cancelled, will revert to original
         .onAppear {
             if originalTask == nil {
-                originalTask = try? JSONDecoder().decode(Task.self, from: JSONEncoder().encode(task))
+                originalTask = task.copy()
             }
         }
         .navigationTitle("Edit Task")
@@ -44,7 +44,7 @@ struct EditTaskView: View {
                         task.currentProgress = originalTask.currentProgress
                         task.deadline = originalTask.deadline
                     }
-                    if task.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    if task.name.trimmed().isEmpty {
                         modelContext.delete(task)
                     }
                     dismiss()

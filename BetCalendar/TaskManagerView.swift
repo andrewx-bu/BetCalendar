@@ -15,14 +15,26 @@ struct TaskManagerView: View {
             List {
                 ForEach(tasks) { task in
                     NavigationLink(value: task) {
+                        // Can make this a different view if gets too big
                         VStack(alignment: .leading) {
                             Text(task.name)
                                 .font(.headline)
-                            Text("Description: \(task.details)")
-                            Text("Created on: \(task.createdAt.formatted(date: .abbreviated, time: .shortened))")
+                            // If description is empty, will hide
+                            if !task.details.trimmed().isEmpty {
+                                Text(task.details)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
                             Text("Goal: \(task.goal)")
+                                .font(.footnote)
                             Text("Current Progress: \(task.currentProgress)")
+                                .font(.footnote)
+                            Text("Created on: \(task.createdAt.formatted(date: .abbreviated, time: .shortened))")
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
                             Text("Deadline: \(task.deadline.formatted(date: .abbreviated, time: .omitted))")
+                                .font(.footnote)
+                                .foregroundColor(.red)
                         }
                     }
                 }
@@ -31,7 +43,11 @@ struct TaskManagerView: View {
             .navigationTitle("Manage Tasks")
             .navigationDestination(for: Task.self, destination: EditTaskView.init)
             .toolbar {
-                Button("Add Task", systemImage: "plus", action: addTask)
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: addTask) {
+                        Label("Add Task", systemImage: "plus")
+                    }
+                }
             }
         }
     }

@@ -10,6 +10,7 @@
 		495B5A2D2C38E2CA00EF375D /* TaskManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B5A2C2C38E2CA00EF375D /* TaskManagerView.swift */; };
 		496CF8832C3C703F00EE4553 /* Parlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496CF8822C3C703F00EE4553 /* Parlay.swift */; };
 		496CF8852C3C735E00EE4553 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496CF8842C3C735E00EE4553 /* EditTaskView.swift */; };
+		496CF8872C3C7EAB00EE4553 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496CF8862C3C7EAB00EE4553 /* Extensions.swift */; };
 		49926E952C3782A000F4ADDA /* BetCalendarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49926E942C3782A000F4ADDA /* BetCalendarApp.swift */; };
 		49926E972C3782A000F4ADDA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49926E962C3782A000F4ADDA /* ContentView.swift */; };
 		49926E992C3782A200F4ADDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49926E982C3782A200F4ADDA /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 		495B5A2C2C38E2CA00EF375D /* TaskManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerView.swift; sourceTree = "<group>"; };
 		496CF8822C3C703F00EE4553 /* Parlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parlay.swift; sourceTree = "<group>"; };
 		496CF8842C3C735E00EE4553 /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
+		496CF8862C3C7EAB00EE4553 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		49926E912C3782A000F4ADDA /* BetCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49926E942C3782A000F4ADDA /* BetCalendarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetCalendarApp.swift; sourceTree = "<group>"; };
 		49926E962C3782A000F4ADDA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				495B5A2C2C38E2CA00EF375D /* TaskManagerView.swift */,
 				496CF8842C3C735E00EE4553 /* EditTaskView.swift */,
 				49926E962C3782A000F4ADDA /* ContentView.swift */,
+				496CF8862C3C7EAB00EE4553 /* Extensions.swift */,
 				49926E982C3782A200F4ADDA /* Assets.xcassets */,
 				49926E9A2C3782A200F4ADDA /* Preview Content */,
 			);
@@ -155,6 +158,7 @@
 				49926E972C3782A000F4ADDA /* ContentView.swift in Sources */,
 				496CF8852C3C735E00EE4553 /* EditTaskView.swift in Sources */,
 				495B5A2D2C38E2CA00EF375D /* TaskManagerView.swift in Sources */,
+				496CF8872C3C7EAB00EE4553 /* Extensions.swift in Sources */,
 				49926EA72C37A5A900F4ADDA /* Task.swift in Sources */,
 				49926EA32C37979500F4ADDA /* Bet.swift in Sources */,
 				49926E952C3782A000F4ADDA /* BetCalendarApp.swift in Sources */,

@@ -50,4 +50,9 @@ import SwiftData
         try container.encode(createdAt, forKey: .createdAt)
         try container.encode(deadline, forKey: .deadline)
     }
+    
+    // Creates a deep copy
+    func copy() -> Task {
+        return Task(name: name, details: details, goal: goal, currentProgress: currentProgress, createdAt: createdAt, deadline: deadline)
+    }
 }
