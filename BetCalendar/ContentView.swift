@@ -17,7 +17,7 @@ struct ContentView: View {
                 .toolbar {
                     Button("Add Sample") {
                         let task1 = Task(name: "Do the Dishes", goal: 2)
-                        let task2 = Task(name: "Work on Swift Project", descriptor: "Finish Bet & Parlay Classes")
+                        let task2 = Task(name: "Work on Swift Project", details: "Finish Bet & Parlay Classes")
                         modelContext.insert(task1)
                         modelContext.insert(task2)
                     }

@@ -5,31 +5,46 @@
 import Foundation
 import SwiftData
 
-@Model class Bet {
+// A Bet will be shown as an odds value button.
+@Model class Bet: Identifiable {
     let id: UUID
-    var descriptor: String
     var wager: Double
-    var odds: [Int]
-    var status: BetStatus
+    var odds: Int
+    var payout: Double {    // Includes wager
+        calculatePayout(odds: self.odds, wager: self.wager)
+    }
+    var status: Status
+    let task: Task          // This Task is linked to this Bet object
     let createdAt: Date
     var settledAt: Date?
     
-    enum BetStatus: String, Codable {
+    enum Status: String, Codable {
         case active, won, lost
     }
     
-    init(descriptor: String = "", wager: Double = 5, odds: [Int] = [-110, -110], status: BetStatus = .active, createdAt: Date = .now, settledAt: Date? = nil) {
+    init(wager: Double = 5, odds: Int = -110, status: Status = .active, task: Task, createdAt: Date = .now, settledAt: Date? = nil) {
         self.id = UUID()
-        self.descriptor = descriptor
         self.wager = wager
         self.odds = odds
         self.status = status
+        self.task = task
         self.createdAt = createdAt
         self.settledAt = settledAt
     }
     
-    func settleBet(status: BetStatus, settledAt: Date = .now) {
-        self.status = status
+    func settleBet(status: Status, settledAt: Date = .now) {
+        self.status = status // won or lost
         self.settledAt = settledAt
+    }
+    
+    // Needs to be tested
+    func calculatePayout(odds: Int, wager: Double) -> Double {
+        var convertedOdds: Double
+        if odds > 0 {
+            convertedOdds = (Double(odds/100)) + 1
+        } else {
+            convertedOdds = -(Double(odds/100)) + 1
+        }
+        return convertedOdds * wager
     }
 }

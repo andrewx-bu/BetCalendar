@@ -18,7 +18,7 @@ struct TaskManagerView: View {
                 VStack(alignment: .leading) {
                     Text(task.name)
                         .font(.headline)
-                    Text("Description: \(task.descriptor)")
+                    Text("Description: \(task.details)")
                     Text("Created on: \(task.createdAt.formatted(date: .abbreviated, time: .shortened))")
                     Text("Goal: \(task.goal)")
                     Text("Current Progress: \(task.currentProgress)")
