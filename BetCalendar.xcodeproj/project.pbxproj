@@ -9,18 +9,19 @@
 /* Begin PBXBuildFile section */
 		495B5A2D2C38E2CA00EF375D /* TaskManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B5A2C2C38E2CA00EF375D /* TaskManagerView.swift */; };
 		496CF8832C3C703F00EE4553 /* Parlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496CF8822C3C703F00EE4553 /* Parlay.swift */; };
+		496CF8852C3C735E00EE4553 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496CF8842C3C735E00EE4553 /* EditTaskView.swift */; };
 		49926E952C3782A000F4ADDA /* BetCalendarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49926E942C3782A000F4ADDA /* BetCalendarApp.swift */; };
 		49926E972C3782A000F4ADDA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49926E962C3782A000F4ADDA /* ContentView.swift */; };
 		49926E992C3782A200F4ADDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49926E982C3782A200F4ADDA /* Assets.xcassets */; };
 		49926E9C2C3782A200F4ADDA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49926E9B2C3782A200F4ADDA /* Preview Assets.xcassets */; };
 		49926EA32C37979500F4ADDA /* Bet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49926EA22C37979500F4ADDA /* Bet.swift */; };
 		49926EA72C37A5A900F4ADDA /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49926EA62C37A5A900F4ADDA /* Task.swift */; };
-		49926EAB2C37AC2C00F4ADDA /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49926EAA2C37AC2C00F4ADDA /* AddTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		495B5A2C2C38E2CA00EF375D /* TaskManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerView.swift; sourceTree = "<group>"; };
 		496CF8822C3C703F00EE4553 /* Parlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parlay.swift; sourceTree = "<group>"; };
+		496CF8842C3C735E00EE4553 /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		49926E912C3782A000F4ADDA /* BetCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49926E942C3782A000F4ADDA /* BetCalendarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetCalendarApp.swift; sourceTree = "<group>"; };
 		49926E962C3782A000F4ADDA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -28,7 +29,6 @@
 		49926E9B2C3782A200F4ADDA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		49926EA22C37979500F4ADDA /* Bet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bet.swift; sourceTree = "<group>"; };
 		49926EA62C37A5A900F4ADDA /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		49926EAA2C37AC2C00F4ADDA /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 				49926EA22C37979500F4ADDA /* Bet.swift */,
 				496CF8822C3C703F00EE4553 /* Parlay.swift */,
 				495B5A2C2C38E2CA00EF375D /* TaskManagerView.swift */,
-				49926EAA2C37AC2C00F4ADDA /* AddTaskView.swift */,
+				496CF8842C3C735E00EE4553 /* EditTaskView.swift */,
 				49926E962C3782A000F4ADDA /* ContentView.swift */,
 				49926E982C3782A200F4ADDA /* Assets.xcassets */,
 				49926E9A2C3782A200F4ADDA /* Preview Content */,
@@ -153,8 +153,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				49926E972C3782A000F4ADDA /* ContentView.swift in Sources */,
+				496CF8852C3C735E00EE4553 /* EditTaskView.swift in Sources */,
 				495B5A2D2C38E2CA00EF375D /* TaskManagerView.swift in Sources */,
-				49926EAB2C37AC2C00F4ADDA /* AddTaskView.swift in Sources */,
 				49926EA72C37A5A900F4ADDA /* Task.swift in Sources */,
 				49926EA32C37979500F4ADDA /* Bet.swift in Sources */,
 				49926E952C3782A000F4ADDA /* BetCalendarApp.swift in Sources */,

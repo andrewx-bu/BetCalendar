@@ -11,9 +11,6 @@ struct BetCalendarApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [
-            Task.self,
-            Bet.self
-        ])
+        .modelContainer(for: Task.self)
     }
 }

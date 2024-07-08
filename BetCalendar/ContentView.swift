@@ -6,26 +6,18 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query var tasks: [Task]
-    @State private var addingTask = false
-    
     var body: some View {
-        NavigationStack {
-            TaskManagerView()
-                .navigationTitle("BetCalendar")
-                .toolbar {
-                    Button("Add Sample") {
-                        let task1 = Task(name: "Do the Dishes", goal: 2)
-                        let task2 = Task(name: "Work on Swift Project", details: "Finish Bet & Parlay Classes")
-                        modelContext.insert(task1)
-                        modelContext.insert(task2)
-                    }
-                }
-        }
+        TaskManagerView()
     }
 }
 
 #Preview {
-    ContentView()
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Task.self, configurations: config)
+    for _ in 1...3 {
+        let task = Task(name: "Example Task", details: "Example Details")
+        container.mainContext.insert(task)
+    }
+    return ContentView()
+        .modelContainer(container)
 }
