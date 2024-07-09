@@ -22,7 +22,7 @@ struct EditTaskView: View {
                 Stepper("Current Progress: \(task.currentProgress)", value: $task.currentProgress, in: 0...50)
             }
             Section {
-                DatePicker("Deadline", selection: $task.deadline, displayedComponents: .date)
+                DatePicker("Deadline", selection: $task.deadline, in: .now...)
             }
         }
         // Create a copy of the task. If edits are cancelled, will revert to original

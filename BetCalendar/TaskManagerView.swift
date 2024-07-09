@@ -7,48 +7,33 @@ import SwiftData
 
 struct TaskManagerView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query var tasks: [Task]
     @State private var path = [Task]()
+    @State private var sortOrder = SortDescriptor(\Task.name)
     
     var body: some View {
         NavigationStack(path: $path) {
-            List {
-                ForEach(tasks) { task in
-                    NavigationLink(value: task) {
-                        // Can make this a different view if gets too big
-                        VStack(alignment: .leading) {
-                            Text(task.name)
-                                .font(.headline)
-                            // If description is empty, will hide
-                            if !task.details.trimmed().isEmpty {
-                                Text(task.details)
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                            }
-                            Text("Goal: \(task.goal)")
-                                .font(.footnote)
-                            Text("Current Progress: \(task.currentProgress)")
-                                .font(.footnote)
-                            Text("Created on: \(task.createdAt.formatted(date: .abbreviated, time: .shortened))")
-                                .font(.footnote)
-                                .foregroundColor(.secondary)
-                            Text("Deadline: \(task.deadline.formatted(date: .abbreviated, time: .omitted))")
-                                .font(.footnote)
-                                .foregroundColor(.red)
-                        }
-                    }
-                }
-                .onDelete(perform: deleteTask)
-            }
-            .navigationTitle("Manage Tasks")
-            .navigationDestination(for: Task.self, destination: EditTaskView.init)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+            TaskListingView(sort: sortOrder)
+                .navigationTitle("Manage Tasks")
+                .navigationDestination(for: Task.self, destination: EditTaskView.init)
+                .toolbar {
                     Button(action: addTask) {
                         Label("Add Task", systemImage: "plus")
                     }
+                    Menu("sort", systemImage: "arrow.up.arrow.down") {
+                        Picker("Sort", selection: $sortOrder) {
+                            Text("Name")
+                                .tag(SortDescriptor(\Task.name))
+                            // Sort by how currentProgress/goal. Goals close to finished are listed first. Implementation is wrong as of now.
+                            Text("Progress")
+                                .tag(SortDescriptor(\Task.currentProgress))
+                            Text("Date Created")
+                                .tag(SortDescriptor(\Task.createdAt))
+                            Text("Deadline")
+                                .tag(SortDescriptor(\Task.deadline))
+                        }
+                        .pickerStyle(.inline)
+                    }
                 }
-            }
         }
     }
     
@@ -56,13 +41,6 @@ struct TaskManagerView: View {
         let task = Task()
         modelContext.insert(task)
         path = [task]
-    }
-     
-    func deleteTask(_ indexSet: IndexSet) {
-        for index in indexSet {
-            let task = tasks[index]
-            modelContext.delete(task)
-        }
     }
 }
 
