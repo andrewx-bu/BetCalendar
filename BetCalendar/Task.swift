@@ -10,23 +10,25 @@ import SwiftData
     let id: UUID
     var name: String
     var details: String
+    var priority: Int           // 1: high, 2: medium, 3: low
     var goal: Int               // Represents the amount of repetitions for that goal
-    var currentProgress: Int
+    var progress: Int           // Amount of repetitions finished
     var createdAt: Date
     var deadline: Date
     
-    init(name: String = "", details: String = "", goal: Int = 1, currentProgress: Int = 0, createdAt: Date = .now, deadline: Date = .now.addingTimeInterval(86400)) {
+    init(name: String = "", details: String = "", priority: Int = 2, goal: Int = 1, progress: Int = 0, createdAt: Date = .now, deadline: Date = .now.addingTimeInterval(86400)) {
         self.id = UUID()
         self.name = name
         self.details = details
+        self.priority = priority
+        self.progress = progress
         self.goal = goal
-        self.currentProgress = currentProgress
         self.createdAt = createdAt
         self.deadline = deadline
     }
     
     enum CodingKeys: String, CodingKey {
-        case id, name, details, goal, currentProgress, createdAt, deadline
+        case id, name, details, priority, goal, progress, createdAt, deadline
     }
     
     required init(from decoder: Decoder) throws {
@@ -34,8 +36,9 @@ import SwiftData
         id = try container.decode(UUID.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
         details = try container.decode(String.self, forKey: .details)
+        priority = try container.decode(Int.self, forKey: .priority)
         goal = try container.decode(Int.self, forKey: .goal)
-        currentProgress = try container.decode(Int.self, forKey: .currentProgress)
+        progress = try container.decode(Int.self, forKey: .progress)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
         deadline = try container.decode(Date.self, forKey: .deadline)
     }
@@ -45,14 +48,15 @@ import SwiftData
         try container.encode(id, forKey: .id)
         try container.encode(name, forKey: .name)
         try container.encode(details, forKey: .details)
+        try container.encode(priority, forKey: .priority)
         try container.encode(goal, forKey: .goal)
-        try container.encode(currentProgress, forKey: .currentProgress)
+        try container.encode(progress, forKey: .progress)
         try container.encode(createdAt, forKey: .createdAt)
         try container.encode(deadline, forKey: .deadline)
     }
     
     // Creates a deep copy
     func copy() -> Task {
-        return Task(name: name, details: details, goal: goal, currentProgress: currentProgress, createdAt: createdAt, deadline: deadline)
+        return Task(name: name, details: details, priority: priority, goal: goal, progress: progress, createdAt: createdAt, deadline: deadline)
     }
 }

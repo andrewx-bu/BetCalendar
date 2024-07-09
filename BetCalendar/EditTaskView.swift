@@ -13,13 +13,19 @@ struct EditTaskView: View {
     
     var body: some View {
         Form {
-            Section("Enter Task and details") {
+            Section("Enter Task name, details, and priority") {
                 TextField("Task Name", text: $task.name)
                 TextField("Details", text: $task.details, axis: .vertical)
+                Picker("Priority", selection: $task.priority) {
+                    Text("High").tag(1)
+                    Text("Medium").tag(2)
+                    Text("Low").tag(3)
+                }
+                .pickerStyle(.segmented)
             }
             Section("Repetitions for this Task") {
                 Stepper("Goal: \(task.goal)", value: $task.goal, in: 1...50)
-                Stepper("Current Progress: \(task.currentProgress)", value: $task.currentProgress, in: 0...50)
+                Stepper("Progress: \(task.progress)", value: $task.progress, in: 0...task.goal - 1)
             }
             Section {
                 DatePicker("Deadline", selection: $task.deadline, in: .now...)
@@ -40,8 +46,9 @@ struct EditTaskView: View {
                     if let originalTask = originalTask {
                         task.name = originalTask.name
                         task.details = originalTask.details
+                        task.priority = originalTask.priority
                         task.goal = originalTask.goal
-                        task.currentProgress = originalTask.currentProgress
+                        task.progress = originalTask.progress
                         task.deadline = originalTask.deadline
                     }
                     if task.name.trimmed().isEmpty {
@@ -61,8 +68,9 @@ struct EditTaskView: View {
         guard let originalTask = originalTask else { return false }
         return task.name != originalTask.name ||
         task.details != originalTask.details ||
+        task.priority != originalTask.priority ||
         task.goal != originalTask.goal ||
-        task.currentProgress != originalTask.currentProgress ||
+        task.progress != originalTask.progress ||
         task.deadline != originalTask.deadline
     }
 }
