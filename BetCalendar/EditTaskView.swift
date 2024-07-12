@@ -15,16 +15,12 @@ struct EditTaskView: View {
         Form {
             Section("Task Name and Details") {
                 TextField("Task Name", text: $task.name)
-                    .onChange(of: task.name) { newValue in
-                        if newValue.count > 25 {
-                            task.name = String(newValue.prefix(25))
-                        }
+                    .onChange(of: task.name) { text in
+                        task.name = String(text.prefix(15))
                     }
                 TextEditor(text: $task.details)
-                    .onChange(of: task.name) { newValue in
-                        if newValue.count > 75 {
-                            task.name = String(newValue.prefix(75))
-                        }
+                    .onChange(of: task.name) { text in
+                        task.name = String(text.prefix(75))
                     }
             }
             Section("Priority") {

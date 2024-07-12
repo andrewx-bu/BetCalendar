@@ -10,6 +10,8 @@ struct TaskManagerView: View {
     @State private var path = [Task]()
     @State private var sortOrder = SortDescriptor(\Task.name)
     @Query var tasks: [Task]
+    // WIP
+    @State private var searchText = ""
     
     // Sort by various methods
     var sortedTasks: [Task] {
@@ -117,6 +119,7 @@ struct TaskManagerView: View {
             }
             .navigationTitle("Manage Tasks")
             .navigationDestination(for: Task.self, destination: EditTaskView.init)
+            .searchable(text: $searchText)
             .toolbar {
                 Button(action: addTask) {
                     Label("Add Task", systemImage: "plus")

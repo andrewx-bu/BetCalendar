@@ -21,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		493E5E202C412008006529CF /* EditTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
+		493E5E222C41E02E006529CF /* Article.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Article.md; sourceTree = "<group>"; };
 		495B5A2C2C38E2CA00EF375D /* TaskManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerView.swift; sourceTree = "<group>"; };
 		496CF8822C3C703F00EE4553 /* Parlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parlay.swift; sourceTree = "<group>"; };
 		496CF8862C3C7EAB00EE4553 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -71,6 +72,7 @@
 				495B5A2C2C38E2CA00EF375D /* TaskManagerView.swift */,
 				493E5E202C412008006529CF /* EditTaskView.swift */,
 				496CF8862C3C7EAB00EE4553 /* Extensions.swift */,
+				493E5E222C41E02E006529CF /* Article.md */,
 				49926E982C3782A200F4ADDA /* Assets.xcassets */,
 				49926E9A2C3782A200F4ADDA /* Preview Content */,
 			);
