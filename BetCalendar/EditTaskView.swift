@@ -13,9 +13,11 @@ struct EditTaskView: View {
     
     var body: some View {
         Form {
-            Section("Enter Task name, details, and priority") {
+            Section("Task Name and Details") {
                 TextField("Task Name", text: $task.name)
                 TextField("Details", text: $task.details, axis: .vertical)
+            }
+            Section("Priority") {
                 Picker("Priority", selection: $task.priority) {
                     Text("High").tag(1)
                     Text("Medium").tag(2)
@@ -25,7 +27,7 @@ struct EditTaskView: View {
             }
             Section("Repetitions for this Task") {
                 Stepper("Goal: \(task.goal)", value: $task.goal, in: 1...50)
-                Stepper("Progress: \(task.progress)", value: $task.progress, in: 0...task.goal - 1)
+                Stepper("Progress: \(task.progress)", value: $task.progress, in: 0...task.goal)
             }
             Section {
                 DatePicker("Deadline", selection: $task.deadline, in: .now...)

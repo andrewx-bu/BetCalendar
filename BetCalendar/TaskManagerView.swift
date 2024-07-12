@@ -36,26 +36,58 @@ struct TaskManagerView: View {
         NavigationStack(path: $path) {
             List {
                 ForEach(sortedTasks) { task in
-                    NavigationLink(value: task) {
-                        VStack(alignment: .leading) {
-                            Text(task.name)
-                                .font(.headline)
-                            if !task.details.trimmed().isEmpty {
-                                Text(task.details)
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
+                    ZStack(alignment: .topTrailing) {
+                        NavigationLink(value: task) {
+                            HStack {
+                                VStack {
+                                    Spacer()
+                                    Button(action: {
+                                        guard task.progress < task.goal else { return }
+                                        task.progress += 1
+                                    }) {
+                                        Image(systemName: "plus.circle")
+                                    }
+                                    .buttonStyle(BorderlessButtonStyle())
+                                    Spacer()
+                                    Text("\(task.progress)/\(task.goal)")
+                                        .font(.footnote)
+                                        .foregroundColor(task.isCompleted ? .green : .primary)
+                                    Spacer()
+                                    // Double Check
+                                    Button(action: {
+                                        guard task.progress > 0 else { return }
+                                        task.progress -= 1
+                                    }) {
+                                        Image(systemName: "minus.circle")
+                                    }
+                                    .buttonStyle(BorderlessButtonStyle())
+                                    Spacer()
+                                }
+                                Divider().frame(width: 1)
+                                VStack(alignment: .leading) {
+                                    Text(task.name)
+                                        .font(.headline)
+                                    if !task.details.trimmed().isEmpty {
+                                        Text(task.details)
+                                            .font(.subheadline)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    Text("Priority: \(priorityText(for: task.priority))")
+                                        .font(.footnote)
+                                    Text("Created: \(task.createdAt.relativeString)")
+                                        .font(.footnote)
+                                    Text("Deadline: \(task.deadline.relativeString)")
+                                        .font(.footnote)
+                                        .foregroundColor(deadlineColor(for: task.deadline))
+                                }
                             }
-                            Text("Priority: \(task.priority)")
-                            Text("Goal: \(task.goal)")
-                                .font(.footnote)
-                            Text("Progress: \(task.progress)")
-                                .font(.footnote)
-                            Text("Created on: \(task.createdAt.formatted(date: .abbreviated, time: .shortened))")
-                                .font(.footnote)
-                                .foregroundColor(.secondary)
-                            Text("Deadline: \(task.deadline.formatted(date: .abbreviated, time: .shortened))")
-                                .font(.footnote)
+                        }
+                        // WIP
+                        if !task.isCompleted && task.deadline.timeIntervalSinceNow <= 12 * 60 * 60 {
+                            Image(systemName: "exclamationmark.circle.fill")
                                 .foregroundColor(.red)
+                                .padding(.top, -5)
+                                .padding(.trailing, -5)
                         }
                     }
                 }
@@ -97,6 +129,31 @@ struct TaskManagerView: View {
         let task = Task()
         modelContext.insert(task)
         path = [task]
+    }
+    
+    func deadlineColor(for deadline: Date) -> Color {
+        let daysRemaining = deadline.days(from: Date())
+        switch daysRemaining {
+        case 1:
+            return .red
+        case 2...3:
+            return .gray
+        case 4...7:
+            return .black
+        default:
+            return .green
+        }
+    }
+    
+    func priorityText(for priority: Int) -> String {
+        switch priority {
+        case 1:
+            return "High"
+        case 2:
+            return "Medium"
+        default:
+            return "Low"
+        }
     }
 }
 

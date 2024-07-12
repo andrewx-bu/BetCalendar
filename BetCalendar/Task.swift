@@ -13,6 +13,9 @@ import SwiftData
     var priority: Int           // 1: high, 2: medium, 3: low
     var goal: Int               // Represents the amount of repetitions for that goal
     var progress: Int           // Amount of repetitions finished
+    var isCompleted: Bool {
+        return progress >= goal
+    }
     var createdAt: Date
     var deadline: Date
     
@@ -21,8 +24,8 @@ import SwiftData
         self.name = name
         self.details = details
         self.priority = priority
-        self.progress = progress
         self.goal = goal
+        self.progress = progress
         self.createdAt = createdAt
         self.deadline = deadline
     }

@@ -22,11 +22,17 @@ extension String {
 
 extension Date {
     // Returns the gap between two dates in days
-    func days(between otherDate: Date) -> Int {
+    func days(from otherDate: Date) -> Int {
         let calendar = Calendar.current
         let startOfSelf = calendar.startOfDay(for: self)
         let startOfOther = calendar.startOfDay(for: otherDate)
         let components = calendar.dateComponents([.day], from: startOfSelf, to: startOfOther)
         return abs(components.day ?? 0)
+    }
+    
+    var relativeString: String {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .full
+        return formatter.localizedString(for: self, relativeTo: Date())
     }
 }
