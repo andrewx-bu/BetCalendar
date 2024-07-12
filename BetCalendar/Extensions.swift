@@ -5,12 +5,6 @@
 import Foundation
 
 extension String {
-    // Returns count of words
-    var wordCount: Int {
-        let regex = try? NSRegularExpression(pattern: "\\w+")
-        return regex?.numberOfMatches(in: self, range: NSRange(location: 0, length: self.utf16.count)) ?? 0
-    }
-    
     func trimmed() -> String {
         trimmingCharacters(in: .whitespacesAndNewlines)
     }
@@ -21,18 +15,15 @@ extension String {
 }
 
 extension Date {
-    // Returns the gap between two dates in days
-    func days(from otherDate: Date) -> Int {
-        let calendar = Calendar.current
-        let startOfSelf = calendar.startOfDay(for: self)
-        let startOfOther = calendar.startOfDay(for: otherDate)
-        let components = calendar.dateComponents([.day], from: startOfSelf, to: startOfOther)
-        return abs(components.day ?? 0)
-    }
-    
     var relativeString: String {
         let formatter = RelativeDateTimeFormatter()
         formatter.unitsStyle = .full
-        return formatter.localizedString(for: self, relativeTo: Date())
+        return formatter.localizedString(for: self, relativeTo: .now)
+    }
+    
+    var nearest15MinuteInterval: Date {
+        let calendar = Calendar.current
+        let next15Minutes = calendar.date(byAdding: .minute, value: 15 - calendar.component(.minute, from: .now) % 15, to: .now)!
+        return next15Minutes
     }
 }

@@ -15,7 +15,17 @@ struct EditTaskView: View {
         Form {
             Section("Task Name and Details") {
                 TextField("Task Name", text: $task.name)
-                TextField("Details", text: $task.details, axis: .vertical)
+                    .onChange(of: task.name) { newValue in
+                        if newValue.count > 25 {
+                            task.name = String(newValue.prefix(25))
+                        }
+                    }
+                TextEditor(text: $task.details)
+                    .onChange(of: task.name) { newValue in
+                        if newValue.count > 75 {
+                            task.name = String(newValue.prefix(75))
+                        }
+                    }
             }
             Section("Priority") {
                 Picker("Priority", selection: $task.priority) {
@@ -30,7 +40,7 @@ struct EditTaskView: View {
                 Stepper("Progress: \(task.progress)", value: $task.progress, in: 0...task.goal)
             }
             Section {
-                DatePicker("Deadline", selection: $task.deadline, in: .now...)
+                DatePicker("Deadline", selection: $task.deadline, in: Date().nearest15MinuteInterval...)
             }
         }
         // Create a copy of the task. If edits are cancelled, will revert to original

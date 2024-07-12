@@ -19,7 +19,7 @@ import SwiftData
     var createdAt: Date
     var deadline: Date
     
-    init(name: String = "", details: String = "", priority: Int = 2, goal: Int = 1, progress: Int = 0, createdAt: Date = .now, deadline: Date = .now.addingTimeInterval(86400)) {
+    init(name: String = "", details: String = "", priority: Int = 2, goal: Int = 1, progress: Int = 0, createdAt: Date = .now, deadline: Date = Date().nearest15MinuteInterval) {
         self.id = UUID()
         self.name = name
         self.details = details

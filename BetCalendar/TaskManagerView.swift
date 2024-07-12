@@ -11,6 +11,7 @@ struct TaskManagerView: View {
     @State private var sortOrder = SortDescriptor(\Task.name)
     @Query var tasks: [Task]
     
+    // Sort by various methods
     var sortedTasks: [Task] {
         tasks.sorted(by: { task1, task2 in
             switch sortOrder {
@@ -49,11 +50,11 @@ struct TaskManagerView: View {
                                     }
                                     .buttonStyle(BorderlessButtonStyle())
                                     Spacer()
+                                    // Make this red if deadline has passed and the task still isn't completed
                                     Text("\(task.progress)/\(task.goal)")
                                         .font(.footnote)
                                         .foregroundColor(task.isCompleted ? .green : .primary)
                                     Spacer()
-                                    // Double Check
                                     Button(action: {
                                         guard task.progress > 0 else { return }
                                         task.progress -= 1
@@ -65,28 +66,49 @@ struct TaskManagerView: View {
                                 }
                                 Divider().frame(width: 1)
                                 VStack(alignment: .leading) {
-                                    Text(task.name)
-                                        .font(.headline)
+                                    HStack(spacing: 10) {
+                                        prioritySymbol(for: task.priority)
+                                            .font(.footnote)
+                                        Text(task.name)
+                                            .font(.headline)
+                                    }
                                     if !task.details.trimmed().isEmpty {
                                         Text(task.details)
                                             .font(.subheadline)
                                             .foregroundColor(.secondary)
+                                            .lineLimit(3)
+                                            .truncationMode(.tail)
                                     }
-                                    Text("Priority: \(priorityText(for: task.priority))")
-                                        .font(.footnote)
-                                    Text("Created: \(task.createdAt.relativeString)")
-                                        .font(.footnote)
-                                    Text("Deadline: \(task.deadline.relativeString)")
-                                        .font(.footnote)
-                                        .foregroundColor(deadlineColor(for: task.deadline))
+                                    Grid(alignment: .leading) {
+                                        GridRow {
+                                            Text("Created:")
+                                                .font(.footnote)
+                                                .frame(width: 60, alignment: .leading)
+                                            Text(task.createdAt.relativeString)
+                                                .font(.footnote)
+                                        }
+                                        GridRow {
+                                            Text("Deadline:")
+                                                .font(.footnote)
+                                                .frame(width: 60, alignment: .leading)
+                                            Text(task.deadline.relativeString)
+                                                .font(.footnote)
+                                                .foregroundColor(deadlineColor(for: task.deadline))
+                                        }
+                                    }
                                 }
                             }
                         }
-                        // WIP
+                        // Add red exclamation if past deadline
                         if !task.isCompleted && task.deadline.timeIntervalSinceNow <= 12 * 60 * 60 {
                             Image(systemName: "exclamationmark.circle.fill")
-                                .foregroundColor(.red)
-                                .padding(.top, -5)
+                                .foregroundColor(.orange)
+                                .padding(.top, 10)
+                                .padding(.trailing, -5)
+                        } else if task.isCompleted {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.green)
+                                .padding(.top, 10)
                                 .padding(.trailing, -5)
                         }
                     }
@@ -132,16 +154,15 @@ struct TaskManagerView: View {
     }
     
     func deadlineColor(for deadline: Date) -> Color {
-        let daysRemaining = deadline.days(from: Date())
-        switch daysRemaining {
-        case 1:
+        let timeInterval = deadline.timeIntervalSinceNow
+        let oneDay: TimeInterval = 60 * 60 * 24
+        let halfWeek: TimeInterval = 3.5 * oneDay
+        if timeInterval < oneDay/2 {
             return .red
-        case 2...3:
+        } else if timeInterval < halfWeek {
+            return .orange
+        } else {
             return .gray
-        case 4...7:
-            return .black
-        default:
-            return .green
         }
     }
     
@@ -153,6 +174,18 @@ struct TaskManagerView: View {
             return "Medium"
         default:
             return "Low"
+        }
+    }
+    
+    // Add color
+    func prioritySymbol(for priority: Int) -> Image {
+        switch priority {
+        case 1:
+            return Image(systemName: "exclamationmark.triangle.fill")
+        case 2:
+            return Image(systemName: "bolt.fill")
+        default:
+            return Image(systemName: "chevron.down.circle.fill")
         }
     }
 }
