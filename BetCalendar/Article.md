@@ -21,15 +21,16 @@ Expansions on Task Control:
     - Allow users to search up tasks.
 - Add a TaskDetailView and a AddTaskView
     - NavLink will enter TaskDetailView, which will have an edit button entering EditTaskView.
-    - AddTaskView will draw from EditTaskView 
+    - AddTaskView will draw from EditTaskView.
 - Add a CompletedTasksView
-    - Shows last 50 completed tasks
+    - Shows last 50 completed tasks.
 - Add a CalendarView
     - Allows users to select tasks with deadline on date selected.
-    - Presented as a sheet/half-sheet (refer to Action app)
+    - Presented as a sheet/half-sheet (refer to Action app).
 - TaskManagerView UI cleanup
     - Allow users to move tasks from TaskManager to CompletedTasks directly from List.
     - Add colors indicating task priority and general task completion (Red, Orange, Yellow, Green, Gray).
 
 Adding Bet Functionality:
-- Modify Task model to have an array of bets (e.g. complete this task 0.5 times OVER/UNDER, > 1.5 repetitions completed, etc.)
+- Modify Task model to have an array of bets (e.g. complete this task 0.5 times OVER/UNDER, > 1.5 repetitions completed, etc.).
+- Ensure relationships (e.g. Cascade) between models are correct.
